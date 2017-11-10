@@ -33,10 +33,26 @@ and open the template in the editor.
                 <form action="ValidateShoesServlet"> 
                 
                     Gender*: </br>   
-                    <input type="radio" name="gender" value="women"/>WOMEN 
-                    <input type="radio" name="gender" value="men"/>MEN
-                    <input type="radio" name="gender" value="girl"/>GIRL
-                    <input type="radio" name="gender" value="boy"/>BOY
+                    <input type="radio" name="gender" value="women"
+                           <c:if test="${param.gender == 'women'}"> 
+                               checked ="true"
+                           </c:if>
+                           />WOMEN 
+                    <input type="radio" name="gender" value="men"
+                           <c:if test="${param.gender == 'men'}"> 
+                               checked ="true"
+                           </c:if>                          
+                           />MEN
+                    <input type="radio" name="gender" value="girl"
+                           <c:if test="${param.gender == 'girl'}"> 
+                               checked ="true"
+                           </c:if>                           
+                           />GIRL
+                    <input type="radio" name="gender" value="boy"
+                           <c:if test="${param.gender == 'boy'}"> 
+                               checked ="true"
+                           </c:if>                          
+                           />BOY
                         <c:if test="${errors.genderMissing}">
                             <i> Must select gender!</i>
                         </c:if>
