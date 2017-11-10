@@ -153,7 +153,7 @@ and open the template in the editor.
                                 <i>Shoes quantity cannot be negative!</i>
                             </c:if>
                             <c:if test="${errors.quantityNotNumeric}">
-                                <i>Quantity must be numeric! </i>
+                                <i>Quantity must be whole number. Eg. 1,2,3,4,...! </i>
                             </c:if>
                             <br/>
                     <input type="submit" value="CREATE ITEM"/>
