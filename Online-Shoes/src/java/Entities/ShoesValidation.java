@@ -15,7 +15,7 @@ public class ShoesValidation {
     // from the drop-down list
     public static boolean validateGender(String gender, ShoesErrorList errors)
     {
-        if(gender == null || gender.equals("select gender"))
+        if(gender == null)
         {
             errors.setGenderMissing(true);
             return false;
