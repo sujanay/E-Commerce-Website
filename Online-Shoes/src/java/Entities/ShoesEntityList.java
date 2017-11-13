@@ -45,8 +45,9 @@ public class ShoesEntityList {
         return null;
     }
         // Get the legal course prefixes as an array
-    public final String[] GENDER = new String[]{"Woman", "Men", "Girl", "Boy"};
-    public String[] getGender() {
-        return GENDER;
+    public final String[] MATERIAL = new String[]{"Fully Leather", "Artificial Leather", "Polyurethane",
+                                                    "PVC/Acrylic"};
+    public String[] getMaterial() {
+        return MATERIAL;
     }
 }

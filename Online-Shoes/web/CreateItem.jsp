@@ -61,7 +61,7 @@ and open the template in the editor.
                         <td id="choice">
                             <select name="brand">
                                 <option value="select brand">Select Brand</option>
-                                <option value="adidas" >Adidas</option>
+                                <option value="adidas">Adidas</option>
                                 <option value="puma">Puma</option>
                                 <option value="vans">Vans</option>
                                 <option value="nike">Nike</option>
@@ -115,7 +115,11 @@ and open the template in the editor.
                                 <option value="loafer">Loafers</option>
                                 <option value="cnm">Clog & Mules</option>
                                 <option value="other">Other</option>
-                            </select>   </br>
+                            </select> 
+                            <c:if test="${errors.styleMissing}">
+                                <i>Must select style! </i>
+                            </c:if>
+                       </br>
                         Price*:</br>
                         <input type="text" name="price" value="${param.price}" placeholder="Enter price"/>
                         <c:if test="${errors.priceMissing}">
@@ -131,8 +135,16 @@ and open the template in the editor.
                        Insole*:</br>
                             <select name="insole">
                                 <option value="select insole">Select Insole</option>
-                                <option value="padded">Padded</option>
-                                <option value="removable">Removable</option>
+                                <option value="padded"
+                                        <c:if test="${param.insole == 'padded'}">
+                                            selected="true"
+                                        </c:if>
+                                        >Padded</option>
+                                <option value="removable"
+                                        <c:if test="${param.insole == 'removable'}">
+                                            selected="true"
+                                        </c:if>                                       
+                                        >Removable</option>
                             </select>
                             <c:if test="${errors.insoleMissing}">
                                 <i>Must select insole information! </i>
@@ -142,12 +154,20 @@ and open the template in the editor.
                         Material*:</br>
                             <select name="material">
                                 <option value="select material">Select Material</option>
-                                <option value="full leather">Fully Leather</option>
-                                <option value="artificial leather">Artificial Leather</option>
-                                <option value="pu">Polyurethane</option>
-                                <option value="pvc">PVC/Acrylic</option>
-                                <option value="other">Other</option>
-                            </select> </br>
+                                <c:forEach var="material" items="${shoesentitylist.material}">
+                                    <option value="${material}"
+                                            <c:if test="${param.material} == material">
+                                                selected="true"
+                                            </c:if>
+                                                >
+                                    ${material}
+                                    </option>
+                                </c:forEach>
+                            </select> 
+                            <c:if test="${errors.materialMissing}">
+                                <i>Must select material!</i>
+                            </c:if>
+                        </br>
                         Occasion*:</br>
                             <select name="occasion">
                                 <option value="select occasion">Select Occasion</option>
@@ -159,7 +179,11 @@ and open the template in the editor.
                                 <option value="night out">Night Out</option>
                                 <option value ="office">Office and Career</option>
                                 <option value="other">Other</option>
-                            </select>   </br>
+                            </select>   
+                            <c:if test="${errors.occasionMissing}">
+                                <i>Must select occasion!</i>
+                            </c:if>
+                        </br>
                         Quantity*:</br>
                             <input type="text" name="quantity" placeholder="Enter Quantity" value="${param.quantity}">
                             <c:if test="${errors.quantityMissing}">
