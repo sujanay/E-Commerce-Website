@@ -34,7 +34,7 @@ public class ValidateShoesServlet extends HttpServlet {
             throws ServletException, IOException {
         
         HttpSession session = request.getSession();
-        String nextpage ="/ItemDetails.jsp";
+        String nextpage ="/TemporaryStubPage.jsp";
         
         // Extract all the form inputs
         String gender = request.getParameter("gender");

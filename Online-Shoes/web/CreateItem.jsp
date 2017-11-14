@@ -26,6 +26,10 @@ and open the template in the editor.
                     <%@include file="/Navbar.jsp" %>                   
                 </div>
                 <div class ="col-5 content">
+                    
+                    <c:if test="${Loggedin!=true}">
+                        <c:redirect url="signIN.jsp"/>
+                    </c:if> 
 
                 <h3>Welcome to the New Item Creation page</h3>
                 You can now create New Item here. All the fields marked * is mandatory.

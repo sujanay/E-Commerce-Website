@@ -19,7 +19,7 @@ and open the template in the editor.
             <li><a href="CreateItem.jsp">Add New Item</a></li>
             <li><a href="#">Store Locations</a></li>
             <li><a href="#">Services</a></li>
-            <c:if test="${loggedin==true}">
+            <c:if test="${Loggedin==true}">
                 <li><a href="LogoutServlet">Logout</a></li>
             </c:if>
             

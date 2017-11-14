@@ -49,7 +49,7 @@ public class ShoesValidation {
         }
         // we compare the string to a regular expression which specifies the value
         // must only contain digits and letters.
-        String modRegEx = "\\w+";
+        String modRegEx = "(\\w+\\s*)+";
         model = model.trim();
         if(!model.matches(modRegEx))
         {
@@ -72,7 +72,7 @@ public class ShoesValidation {
         }
         // we compare the string to a regular expression which specifies
         // the value must only contain letters.
-        String colRegEx = "\\w+";
+        String colRegEx = "([a-zA-Z]\\s*)+";
         color = color.trim();
         if(!color.matches(colRegEx))
         {

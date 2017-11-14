@@ -33,7 +33,7 @@ public class ValidateLogin extends HttpServlet {
             String password = request.getParameter("password");
             String nextpage="";
             if(email.equalsIgnoreCase("sujanay@hotmail.com")&&password.equals("1234")){
-                nextpage = "/ItemDetails.jsp";
+                nextpage = "/CreateItem.jsp";
                 HttpSession session = request.getSession();
                 session.setAttribute("Loggedin", true);
             }
