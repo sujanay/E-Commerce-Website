@@ -81,7 +81,10 @@ public class ValidateShoesServlet extends HttpServlet {
             
             double price = Double.parseDouble(strPrice);
             int quantity = Integer.parseInt(strQuantity);
-            shoes.add(gender, brand, model, color, size, style, price, insole, material, occasion, quantity);
+            
+            //call the addShoes function of ShoesEntityList.java class and add the new
+            //shoe to the database.
+            ShoesEntityList.addShoes(gender, brand, model, color, size, style, price, insole, material, occasion, quantity);
             session.setAttribute("currentshoe", shoes.getShoes(brand, model));
             session.setAttribute("shoeslist", shoes);
         }

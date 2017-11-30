@@ -35,6 +35,10 @@ public class GetShoesServlet extends HttpServlet {
         if(session.getAttribute("shoesentitylist")==null)
         {
             ShoesEntityList shoes = new ShoesEntityList();
+            
+            //if there is no any shoes added in the shoesentitylist then load it from
+            //the database
+            shoes.loadShoes();
             session.setAttribute("shoesentitylist", shoes);
             nextpage = "/Home.jsp";
         }

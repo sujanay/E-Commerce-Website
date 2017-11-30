@@ -5,6 +5,7 @@
  */
 package Entities;
 
+import java.sql.*;
 import java.util.ArrayList;
 
 /**
@@ -13,23 +14,114 @@ import java.util.ArrayList;
  */
 public class ShoesEntityList {
     
-    ArrayList<Shoes> shoes = new ArrayList<>();  // ArrayList created for storing 
+    ArrayList<Shoes> shoes;  // ArrayList created for storing 
                                                  // the lists of shoes
 
     public ShoesEntityList() {
-        shoes.add(new Shoes("men", "Adidas","Fire","black", "small", "sneakers", 70, "padded", "fully leather", "casual", 10));
-        shoes.add(new Shoes("women", "Vans","Sk8-Hi","white", "medium", "athletics", 49, "padded", "artificial leather", "dress", 12));
-        shoes.add(new Shoes("men", "Puma","Heritage","brown", "small", "sandle", 90, "removable", "fully leather", "wedding", 1));
-        shoes.add(new Shoes("boy", "Zara","Grafitti Plimsolls","taupe", "large", "boot", 120, "padded", "pu", "night out", 12));
-        shoes.add(new Shoes("girl", "Nike","Air Force 1","gray", "medium", "loafer", 100, "removable", "pvc", "office", 21));
+        shoes = new ArrayList();
     }
 
     public ArrayList<Shoes> getShoes() {
         return shoes;
     }
     
-    public void add(String gender, String brand, String model, String color, String size, String style, double price, String insole, String material, String occasion, int quantity) {
-        shoes.add(new Shoes(gender, brand, model, color, size, style, price, insole, material, occasion, quantity));
+    // Get the existing shoes from the database and add them to the list.
+    public void loadShoes(){
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet results = null;
+        try{
+            //Load appropriate database driver
+            Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
+            
+            //Connect to the database through that driver using the 
+            //database url and the username and password
+            connection = DriverManager.getConnection("jdbc:derby://localhost:1527/shoes", "app", "app");
+            
+        }
+        catch(SQLException ex){
+            System.out.println("Connection failed!");
+        }
+        catch(Exception ex){
+            System.out.println("No driver!");
+        }
+        
+        try{
+            //Create and execute query statement for all in Shoes table,
+            //storing links to matching records in ResultSet object results.
+            statement = connection.createStatement();
+            results = statement.executeQuery("select * from Shoes");
+            
+            //Loop to the next record in results, while there is a next record
+            while(results.next()){
+                
+                //Get each field in current record (as appropriate type)
+                String gender = results.getString("Gender");
+                String brand = results.getString("Brand");
+                String model = results.getString("Model");
+                String color = results.getString("Color");
+                String size = results.getString("Size");
+                String style = results.getString("Style");
+                double price = results.getDouble("Price");
+                String insole = results.getString("Insole");
+                String material = results.getString("Material");
+                String occasion = results.getString("Occasion");
+                int quantity = results.getInt("Quantity");
+                
+                Shoes s = new Shoes(gender, brand, model, color, size, style, price, insole, material, occasion, quantity);
+                shoes.add(s);                
+            }
+        }
+        catch(SQLException ex){
+            System.out.println("Query failed!");
+        }
+    }
+    
+    //Save new course to database
+    public static void addShoes(String gender, String brand, String model, String color, String size, String style, double price, String insole, String material, String occasion, int quantity)
+    {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet results = null;
+        try{
+            //Load the appropriate database driver
+            Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
+            
+            //connect to the database through that driver, using the database
+            //url and the username and password
+            connection = DriverManager.getConnection("jdbc:derby://localhost:1527/shoes", "app", "app");
+        }
+        catch(SQLException ex){
+            System.out.println("Connection failed!");
+        }
+        catch(Exception ex){
+            System.out.println("No driver!");
+        }
+        
+        try{
+            
+            String template = "insert into Shoes "
+                    +"(Gender, Brand, Model, Color, Size, Style, Price, Insole, Material, Occasion, Quantity)"
+                    + "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            statement = connection.prepareStatement(template);
+            statement.setString(1, gender);
+            statement.setString(2, brand);
+            statement.setString(3, model);
+            statement.setString(4, color);
+            statement.setString(5, size);
+            statement.setString(6, style);
+            statement.setDouble(7, price);
+            statement.setString(8, insole);
+            statement.setString(9, material);
+            statement.setString(10, occasion);
+            statement.setInt(11, quantity);
+            int changed = statement.executeUpdate();
+            System.out.println(changed + " record added");
+                        
+        }catch(SQLException ex){
+            System.out.println("Query failed!");
+        }
+        
     }
     
     // Search the list of current courses for one with the given
