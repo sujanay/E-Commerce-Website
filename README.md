@@ -1,7 +1,6 @@
 # Online-Shoes
-E-Commerce website based project written in Java Server Page(JSP)/Servlet with MVC Architecture
+E-Commerce website based project written in Java with MVC Architecture
 
-It allows to create new items, that is shoes, and insert it into a derby database.
-The details inserted of the items is validated in model part of the MVC architecture and 
-finally, the items stored in the database can be retrieved and is displayed with the JSP,
-View part of the MVC.
+The frontend of this project is built JSP, HTML, CSS, and Bootstrap. At the backend,
+the user input is validated at the Model part of the MVC paradigm using Java Expression
+Language. The validated input from the user is then persisted in a derby database server.
